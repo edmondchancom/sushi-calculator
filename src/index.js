@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom/client";  // ª`·N³o¸Ì­n¥Î client
+import ReactDOM from "react-dom/client";  // æ³¨æ„é€™è£¡è¦ç”¨ client
 import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
