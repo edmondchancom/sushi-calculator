@@ -44,6 +44,25 @@
     height: 50px; /* Logo 高度 */
 }
 
+.plate-icon {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.plate-row {
+    display: flex;
+    align-items: center; /* 垂直置中 */
+    gap: 10px; /* 圖片和文字之間留空 */
+    margin-bottom: 10px; /* 每行之間留空 */
+}
+
+.plate-icon {
+    width: 60px;
+    height: 60px;
+}
+
 
 
 
