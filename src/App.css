@@ -38,9 +38,9 @@
 }
 
 .logo {
-    position: fixed; /* 固定在視窗，不隨捲動 */
-    top: 10px; /* 距離上方 10px */
-    left: 10px; /* 距離左邊 10px */
+    /* 移除 fixed，讓 logo 隨頁面捲動 */
+    position: static;
+    margin: 10px; /* 保持與邊界的距離 */
     height: 50px; /* Logo 高度 */
 }
 
@@ -55,12 +55,30 @@
     display: flex;
     align-items: center; /* 垂直置中 */
     gap: 10px; /* 圖片和文字之間留空 */
-    margin-bottom: 10px; /* 每行之間留空 */
+    margin-bottom: 1px; /* 每行之間留空 */
 }
 
 .plate-icon {
     width: 60px;
     height: 60px;
+}
+
+.header {
+    display: flex;
+    align-items: center; /* 垂直置中 */
+    gap: 15px; /* logo 和文字之間留空 */
+    margin: 10px;
+}
+
+.logo {
+    height: 50px;
+}
+
+.thumb-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    margin-right: 10px;
 }
 
 
