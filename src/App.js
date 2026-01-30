@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./App.css"; // 引入 CSS
+import bg from './assets/bg.jpg';
+
 
 function App() {
     const [red, setRed] = useState(0);
@@ -26,7 +28,17 @@ function App() {
     };
 
     return (
-        <div style={{ padding: "20px", fontFamily: "Microsoft JhengHei, Arial" }}>
+        <div style={{
+            backgroundImage: `url(${bg})`,
+            backgroundRepeat: "repeat",
+            backgroundSize: "auto",
+            backgroundPosition: "top left",
+            minHeight: "100vh",   // 讓背景填滿整個視窗
+            padding: "20px",
+            fontFamily: "Microsoft JhengHei, Arial"
+        }}>
+
+
             {/* 左上角固定 Logo */}
             <img src="/logo.png" alt="Logo" className="logo" />
 
