@@ -38,11 +38,24 @@
 }
 
 .logo {
-    position: fixed; /* ©T©w¦bµøµ¡¡A¤£ÀH±²°Ê */
-    top: 10px; /* ¶ZÂ÷¤W¤è 10px */
-    left: 10px; /* ¶ZÂ÷¥ªÃä 10px */
-    height: 50px; /* Logo °ª«× */
+    position: fixed; /* å›ºå®šåœ¨è¦–çª—ï¼Œä¸éš¨æ²å‹• */
+    top: 10px; /* è·é›¢ä¸Šæ–¹ 10px */
+    left: 10px; /* è·é›¢å·¦é‚Š 10px */
+    height: 50px; /* Logo é«˜åº¦ */
 }
+
+/* âœ… èƒŒæ™¯åœ–è¨­å®šï¼Œå°æ‡‰ public/bg.jpg */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Microsoft JhengHei", Arial, sans-serif;
+    background-image: url("/bg.jpg"); /* âœ… public/bg.jpg */
+    background-repeat: repeat;
+    background-size: cover;
+    background-position: top left;
+}
+
+
 
 
 

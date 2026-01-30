@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import "./App.css"; // 引入 CSS
-import bg from './assets/bg.jpg';
-
+import "./App.css";
 
 function App() {
     const [red, setRed] = useState(0);
@@ -12,13 +10,9 @@ function App() {
     const bluePrice = 15;
     const goldPrice = 20;
 
-    // 計算總淨金額
     const netTotal = red * redPrice + blue * bluePrice + gold * goldPrice;
-    // 服務費 = 總淨金額的 10%
     const serviceFee = (netTotal * 0.1).toFixed(2);
-    // 總金額 = 總淨金額 + 服務費
     const grossTotal = (netTotal + parseFloat(serviceFee)).toFixed(2);
-
     const totalPlates = red + blue + gold;
 
     const resetAll = () => {
@@ -28,21 +22,8 @@ function App() {
     };
 
     return (
-        <div style={{
-            backgroundImage: `url(${bg})`,
-            backgroundRepeat: "repeat",
-            backgroundSize: "auto",
-            backgroundPosition: "top left",
-            minHeight: "100vh",   // 讓背景填滿整個視窗
-            padding: "20px",
-            fontFamily: "Microsoft JhengHei, Arial"
-        }}>
-
-
-            {/* 左上角固定 Logo */}
+        <div className="app-container">
             <img src="/logo.png" alt="Logo" className="logo" />
-
-            {/* 標題 */}
             <h1 style={{ marginLeft: "70px" }}>壽司郎碟計算器</h1>
 
             <div>
@@ -64,7 +45,6 @@ function App() {
             </div>
 
             <hr />
-
             <h2>總碟數: {totalPlates}</h2>
             <h2>總淨金額: HK$ {netTotal}</h2>
             <h2>服務費 (10%): HK$ {serviceFee}</h2>
