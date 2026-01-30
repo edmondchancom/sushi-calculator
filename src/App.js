@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./App.css"; // 引入 CSS
 
 function App() {
     const [red, setRed] = useState(0);
@@ -26,7 +27,11 @@ function App() {
 
     return (
         <div style={{ padding: "20px", fontFamily: "Microsoft JhengHei, Arial" }}>
-            <h1>壽司郎碟計算器</h1>
+            {/* 左上角固定 Logo */}
+            <img src="/logo.png" alt="Logo" className="logo" />
+
+            {/* 標題 */}
+            <h1 style={{ marginLeft: "70px" }}>壽司郎碟計算器</h1>
 
             <div>
                 <p>紅碟: {red} (金額: HK$ {red * redPrice})</p>
@@ -45,7 +50,7 @@ function App() {
                 <button onClick={() => setGold(gold + 1)}>加一碟 (+HK$ {goldPrice})</button>
                 <button onClick={() => setGold(gold > 0 ? gold - 1 : 0)}>減一碟</button>
             </div>
-// dummy change
+
             <hr />
 
             <h2>總碟數: {totalPlates}</h2>

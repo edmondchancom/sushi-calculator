@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.logo {
+    position: fixed; /* 固定在視窗，不隨捲動 */
+    top: 10px; /* 距離上方 10px */
+    left: 10px; /* 距離左邊 10px */
+    height: 50px; /* Logo 高度 */
+}
+
