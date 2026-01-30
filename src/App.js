@@ -25,7 +25,7 @@ function App() {
         <div
             className="app-container"
             style={{
-                backgroundImage: `url(${process.env.PUBLIC_URL}/bg.jpg)`,
+                backgroundImage: `url(${process.env.PUBLIC_URL}/bg.png)`,
                 backgroundRepeat: "repeat",
                 backgroundSize: "cover",
                 minHeight: "100vh"
