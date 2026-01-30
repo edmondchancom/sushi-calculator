@@ -122,6 +122,8 @@ function App() {
         others.reduce((sum, item) => sum + item.price * item.qty, 0);
 
 
+    const [recipientEmail, setRecipientEmail] = useState("");
+
 
 
     const serviceFee = (netTotal * 0.1).toFixed(2);
@@ -359,11 +361,63 @@ function App() {
             <button onClick={resetAll} style={{ marginTop: "20px" }}>
                 重置
             </button>
+
+            <div style={{ marginTop: "20px" }}>
+                <label>
+                    收件人電郵：
+                    <input
+                        type="email"
+                        value={recipientEmail}
+                        onChange={(e) => setRecipientEmail(e.target.value)}
+                        placeholder="輸入電郵地址"
+                    />
+                </label>
+            </div>
+
+
             <button
                 onClick={() => {
-                    const subject = "壽司郎帳單";
-                    const body = `總金額: HK$ ${grossTotal}\n印花卡: ${Math.floor(grossTotal / 80)} 張\n\n詳細:\n...`;
-                    window.location.href = `mailto:your@email.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                    if (!recipientEmail) {
+                        alert("請輸入收件人電郵地址");
+                        return;
+                    }
+
+                    // 取得今天日期
+                    const today = new Date();
+                    const dateStr = today.toLocaleDateString("zh-HK", {
+                        year: "numeric",
+                        month: "2-digit",
+                        day: "2-digit",
+                    });
+                    // 主旨：當天日期 + 壽司郎帳單
+                    const subject = `${dateStr} 壽司郎帳單`;
+
+                    // 詳細列出所有細項
+                    const details = [
+                        red > 0 ? `紅碟: ${red} × HK$${prices.red} = HK$${red * prices.red}` : null,
+                        gold > 0 ? `金碟: ${gold} × HK$${prices.gold} = HK$${gold * prices.gold}` : null,
+                        silver > 0 ? `銀碟: ${silver} × HK$${prices.silver} = HK$${silver * prices.silver}` : null,
+                        black > 0 ? `黑碟: ${black} × HK$${prices.black} = HK$${black * prices.black}` : null,
+                        white > 0 ? `白碟: ${white} × HK$${prices.white} = HK$${white * prices.white}` : null,
+                        ...noodleSoupItems
+                            .filter(item => counts[item.key] > 0)
+                            .map(item => `${item.name}: ${counts[item.key]} × HK$${item.price} = HK$${counts[item.key] * item.price}`),
+                        ...sideItems
+                            .filter(item => counts[item.key] > 0)
+                            .map(item => `${item.name}: ${counts[item.key]} × HK$${item.price} = HK$${counts[item.key] * item.price}`),
+                        ...dessertItems
+                            .filter(item => counts[item.key] > 0)
+                            .map(item => `${item.name}: ${counts[item.key]} × HK$${item.price} = HK$${counts[item.key] * item.price}`),
+                        ...others
+                            .filter(item => item.qty > 0)
+                            .map((item, idx) => `其他${idx + 1}: ${item.qty} × HK$${item.price} = HK$${item.qty * item.price}`),
+                    ].filter(Boolean).join("\n");
+
+
+
+                    const body = `總項目數: ${totalItems}\n總淨金額: HK$${netTotal}\n服務費 (10%): HK$${serviceFee}\n總金額 (含服務費): HK$${grossTotal}\n印花卡: ${Math.floor(grossTotal / 80)} 張\n\n詳細:\n${details}`;
+
+                    window.location.href = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
                 }}
             >
                 發送帳單電郵
