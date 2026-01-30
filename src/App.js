@@ -9,11 +9,38 @@ function App() {
     const [black, setBlack] = useState(0);
     const [white, setWhite] = useState(0);
 
-    // 小食 & 甜品
-    const [fries, setFries] = useState(0);
-    const [steamedEgg, setSteamedEgg] = useState(0);
-    const [friedChicken, setFriedChicken] = useState(0);
-    const [dessert, setDessert] = useState(0);
+    // 小食清單
+    const snackItems = [
+        { key: "fries", name: "黃金脆薯", price: 13 },
+        { key: "pumpkinTempura", name: "南瓜天婦羅", price: 13 },
+        { key: "shrimpTempuraSet", name: "炸蝦天婦羅拼盤(半份)", price: 18 },
+        { key: "shrimpTempura", name: "炸蝦天婦羅", price: 18 },
+        { key: "chickenCartilage", name: "炸雞軟骨", price: 19 },
+        { key: "steamedEgg", name: "茶碗蒸", price: 19 },
+        { key: "friedChicken", name: "脆脆炸雞塊", price: 22 },
+    ];
+
+    // 甜品清單
+    const dessertItems = [
+        { key: "melonSorbet", name: "蜜瓜味雪葩", price: 13 },
+        { key: "frozenMango", name: "冷凍芒果", price: 13 },
+        { key: "milkIceCookie", name: "牛奶味軟雪糕(有曲奇)", price: 18 },
+        { key: "milkIce", name: "牛奶味軟雪糕", price: 18 },
+        { key: "pudding", name: "壽司郎經典布甸", price: 22 },
+        { key: "catalana", name: "卡達拉娜", price: 22 },
+        { key: "milleCrepe", name: "千層蛋糕", price: 22 },
+        { key: "peachMontBlanc", name: "白桃蒙布朗蛋糕", price: 22 },
+        { key: "matchaParfait", name: "抹茶蕨餅芭菲", price: 27 },
+        { key: "chocoBerryParfait", name: "朱古力香莓芭菲", price: 27 },
+    ];
+
+    // 狀態：為每個品項建立一個 useState
+    const [counts, setCounts] = useState(
+        [...snackItems, ...dessertItems].reduce((acc, item) => {
+            acc[item.key] = 0;
+            return acc;
+        }, {})
+    );
 
     // 價格表
     const prices = {
@@ -22,10 +49,6 @@ function App() {
         gold: 22,
         black: 27,
         white: 10,
-        fries: 13,
-        steamedEgg: 19,
-        friedChicken: 22,
-        dessert: 22,
     };
 
     // Accordion 狀態
@@ -41,10 +64,10 @@ function App() {
         silver * prices.silver +
         black * prices.black +
         white * prices.white +
-        fries * prices.fries +
-        steamedEgg * prices.steamedEgg +
-        friedChicken * prices.friedChicken +
-        dessert * prices.dessert;
+        [...snackItems, ...dessertItems].reduce(
+            (sum, item) => sum + counts[item.key] * item.price,
+            0
+        );
 
     const serviceFee = (netTotal * 0.1).toFixed(2);
     const grossTotal = (netTotal + parseFloat(serviceFee)).toFixed(2);
@@ -54,10 +77,10 @@ function App() {
         silver +
         black +
         white +
-        fries +
-        steamedEgg +
-        friedChicken +
-        dessert;
+        [...snackItems, ...dessertItems].reduce(
+            (sum, item) => sum + counts[item.key],
+            0
+        );
 
     const resetAll = () => {
         setRed(0);
@@ -65,10 +88,12 @@ function App() {
         setSilver(0);
         setBlack(0);
         setWhite(0);
-        setFries(0);
-        setSteamedEgg(0);
-        setFriedChicken(0);
-        setDessert(0);
+        setCounts(
+            [...snackItems, ...dessertItems].reduce((acc, item) => {
+                acc[item.key] = 0;
+                return acc;
+            }, {})
+        );
     };
 
     return (
@@ -126,33 +151,63 @@ function App() {
             </h2>
             {openSection === "snacks" && (
                 <div>
-                    <div>
-                        <p>脆薯: {fries} (HK$ {fries * prices.fries})</p>
-                        <button onClick={() => setFries(fries + 1)}>+1</button>
-                        <button onClick={() => setFries(fries > 0 ? fries - 1 : 0)}>-1</button>
-                    </div>
-                    <div>
-                        <p>茶碗蒸: {steamedEgg} (HK$ {steamedEgg * prices.steamedEgg})</p>
-                        <button onClick={() => setSteamedEgg(steamedEgg + 1)}>+1</button>
-                        <button onClick={() => setSteamedEgg(steamedEgg > 0 ? steamedEgg - 1 : 0)}>-1</button>
-                    </div>
-                    <div>
-                        <p>炸雞塊: {friedChicken} (HK$ {friedChicken * prices.friedChicken})</p>
-                        <button onClick={() => setFriedChicken(friedChicken + 1)}>+1</button>
-                        <button onClick={() => setFriedChicken(friedChicken > 0 ? friedChicken - 1 : 0)}>-1</button>
-                    </div>
+                    {snackItems.map((item) => (
+                        <div key={item.key} className="plate-row">
+                            <p>
+                                {item.name}: {counts[item.key]} (HK$ {counts[item.key] * item.price})
+                            </p>
+                            <button
+                                onClick={() =>
+                                    setCounts({ ...counts, [item.key]: counts[item.key] + 1 })
+                                }
+                            >
+                                +1
+                            </button>
+                            <button
+                                onClick={() =>
+                                    setCounts({
+                                        ...counts,
+                                        [item.key]: counts[item.key] > 0 ? counts[item.key] - 1 : 0,
+                                    })
+                                }
+                            >
+                                -1
+                            </button>
+                        </div>
+                    ))}
                 </div>
             )}
 
             {/* Accordion - 甜品 */}
-            <h2 onClick={() => toggleSection("dessert")}>
-                {openSection === "dessert" ? "▼" : "▶"} 甜品
+            <h2 onClick={() => toggleSection("desserts")}>
+                {openSection === "desserts" ? "▼" : "▶"} 甜品
             </h2>
-            {openSection === "dessert" && (
+            {openSection === "desserts" && (
                 <div>
-                    <p>甜品: {dessert} (HK$ {dessert * prices.dessert})</p>
-                    <button onClick={() => setDessert(dessert + 1)}>+1</button>
-                    <button onClick={() => setDessert(dessert > 0 ? dessert - 1 : 0)}>-1</button>
+                    {dessertItems.map((item) => (
+                        <div key={item.key} className="plate-row">
+                            <p>
+                                {item.name}: {counts[item.key]} (HK$ {counts[item.key] * item.price})
+                            </p>
+                            <button
+                                onClick={() =>
+                                    setCounts({ ...counts, [item.key]: counts[item.key] + 1 })
+                                }
+                            >
+                                +1
+                            </button>
+                            <button
+                                onClick={() =>
+                                    setCounts({
+                                        ...counts,
+                                        [item.key]: counts[item.key] > 0 ? counts[item.key] - 1 : 0,
+                                    })
+                                }
+                            >
+                                -1
+                            </button>
+                        </div>
+                    ))}
                 </div>
             )}
 
@@ -160,7 +215,10 @@ function App() {
             <h2>總項目數: {totalItems}</h2>
             <h2>總淨金額: HK$ {netTotal}</h2>
             <h2>服務費 (10%): HK$ {serviceFee}</h2>
-            <h2>總金額 (含服務費): HK$ {grossTotal}</h2>
+            <h2>總金額 (含服務費): <span style={{ color: "red" }}> HK$ {grossTotal}</span></h2>
+            <h2>可用印花卡: <span style={{ color: "red" }}>{Math.floor(grossTotal / 80)} 張</span></h2>
+
+
 
             <button onClick={resetAll} style={{ marginTop: "20px" }}>
                 重置
