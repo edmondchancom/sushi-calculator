@@ -359,6 +359,17 @@ function App() {
             <button onClick={resetAll} style={{ marginTop: "20px" }}>
                 重置
             </button>
+            <button
+                onClick={() => {
+                    const subject = "壽司郎帳單";
+                    const body = `總金額: HK$ ${grossTotal}\n印花卡: ${Math.floor(grossTotal / 80)} 張\n\n詳細:\n...`;
+                    window.location.href = `mailto:your@email.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                }}
+            >
+                發送帳單電郵
+            </button>
+
+
         </div>
     );
 }
