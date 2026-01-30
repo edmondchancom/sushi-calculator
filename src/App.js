@@ -22,7 +22,17 @@ function App() {
     };
 
     return (
-        <div className="app-container">
+        <div
+            className="app-container"
+            style={{
+                backgroundImage: `url(${process.env.PUBLIC_URL}/bg.jpg)`,
+                backgroundRepeat: "repeat",
+                backgroundSize: "cover",
+                minHeight: "100vh"
+            }}
+        >
+
+
             <img src="/logo.png" alt="Logo" className="logo" />
             <h1 style={{ marginLeft: "70px" }}>壽司郎碟計算器</h1>
 
