@@ -44,17 +44,6 @@
     height: 50px; /* Logo 高度 */
 }
 
-/* ✅ 背景圖設定，對應 public/bg.jpg */
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "Microsoft JhengHei", Arial, sans-serif;
-    background-image: url("/bg.jpg"); /* ✅ public/bg.jpg */
-    background-repeat: repeat;
-    background-size: cover;
-    background-position: top left;
-}
-
 
 
 
