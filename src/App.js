@@ -45,7 +45,7 @@ function App() {
                 <button onClick={() => setGold(gold + 1)}>加一碟 (+HK$ {goldPrice})</button>
                 <button onClick={() => setGold(gold > 0 ? gold - 1 : 0)}>減一碟</button>
             </div>
-
+// dummy change
             <hr />
 
             <h2>總碟數: {totalPlates}</h2>
