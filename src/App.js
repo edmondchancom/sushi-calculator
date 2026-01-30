@@ -9,6 +9,18 @@ function App() {
     const [black, setBlack] = useState(0);
     const [white, setWhite] = useState(0);
 
+    // 麵類・湯類清單
+    const noodleSoupItems = [
+        { key: "clamSeaweedMisoSoup", name: "蜆肉海苔麵豉湯", price: 20, image: "B1.png" },
+        { key: "tofuSkinUdon", name: "腐皮烏冬", price: 27, image: "B2.png" },
+        { key: "kamatamaUdon", name: "釜玉烏冬", price: 28, image: "B3.png" },
+        { key: "shrimpTempuraUdon", name: "炸蝦天婦羅烏冬", price: 28, image: "B4.png" },
+        { key: "tonkotsuRamen", name: "豚骨拉麵", price: 32, image: "B5.png" },
+        { key: "taiClamRamen", name: "鯛魚湯蜆肉拉麵", price: 33, image: "B6.png" },
+        { key: "beefUdon", name: "牛肉烏冬", price: 33, image: "B7.png" },
+    ];
+
+
     // 副餐類清單
     const sideItems = [
         { key: "pepperSauce", name: "青唐辛子燒椒醬", price: 3, image: "0.png" },
@@ -59,7 +71,7 @@ function App() {
 
     // 狀態：為每個品項建立一個 useState
     const [counts, setCounts] = useState(
-        [...sideItems, ...dessertItems].reduce((acc, item) => {
+        [...noodleSoupItems, ...sideItems, ...dessertItems].reduce((acc, item) => {
             acc[item.key] = 0;
             return acc;
         }, {})
@@ -103,7 +115,7 @@ function App() {
         silver * prices.silver +
         black * prices.black +
         white * prices.white +
-        [...sideItems, ...dessertItems].reduce(
+        [...noodleSoupItems, ...sideItems, ...dessertItems].reduce(
             (sum, item) => sum + counts[item.key] * item.price,
             0
         ) +
@@ -120,7 +132,7 @@ function App() {
         silver +
         black +
         white +
-        [...sideItems, ...dessertItems].reduce(
+        [...noodleSoupItems, ...sideItems, ...dessertItems].reduce(
             (sum, item) => sum + counts[item.key],
             0
         ) +
@@ -195,6 +207,43 @@ function App() {
                 <button onClick={() => setWhite(white > 0 ? white - 1 : 0)}>-1</button>
             </div>
 
+            {/* Accordion - 麵類・湯類 */}
+            <h2 onClick={() => toggleSection("noodles")}>
+                {openSection === "noodles" ? "▼" : "▶"} 麵類・湯類
+            </h2>
+            {openSection === "noodles" && (
+                <div>
+                    {noodleSoupItems.map((item) => (
+                        <div key={item.key} className="plate-row">
+                            <img
+                                src={`${process.env.PUBLIC_URL}/${item.image}`}
+                                alt={item.name}
+                                className="thumb-icon"
+                            />
+                            <p>
+                                {item.name}: {counts[item.key]} (HK$ {counts[item.key] * item.price})
+                            </p>
+                            <button
+                                onClick={() =>
+                                    setCounts({ ...counts, [item.key]: counts[item.key] + 1 })
+                                }
+                            >
+                                +1
+                            </button>
+                            <button
+                                onClick={() =>
+                                    setCounts({
+                                        ...counts,
+                                        [item.key]: counts[item.key] > 0 ? counts[item.key] - 1 : 0,
+                                    })
+                                }
+                            >
+                                -1
+                            </button>
+                        </div>
+                    ))}
+                </div>
+            )}
             {/* Accordion - 副餐類  */}
             <h2 onClick={() => toggleSection("sides")}>
                 {openSection === "sides" ? "▼" : "▶"} 副餐類
