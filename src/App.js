@@ -422,10 +422,23 @@ function App() {
             >
                 發送帳單電郵
             </button>
+            <footer style={{
+                marginTop: "30px",
+                textAlign: "center",
+                fontSize: "18px",   // 字體大一點
+                color: "#000"       // 黑色字體
+            }}>
+                © Copyright by Edmond Chan, {new Date().getFullYear()}
+            </footer>
+
 
 
         </div>
+
     );
+    
+
+
 }
 
 export default App;
