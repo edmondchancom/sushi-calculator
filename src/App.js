@@ -219,7 +219,7 @@ function App() {
                 {/* 單價調整 */}
                 <button onClick={() => setWhitePrice(whitePrice + 1)} style={{ marginLeft: "10px" }}>$+1</button>
                 <button onClick={() => setWhitePrice(whitePrice > 0 ? whitePrice - 1 : 0)} style={{ marginLeft: "5px" }}>$-1</button>
-
+               
                 {/* 數量調整 */}
                 <button onClick={() => setWhite(white + 1)} style={{ marginLeft: "10px" }}>+1</button>
                 <button onClick={() => setWhite(white > 0 ? white - 1 : 0)} style={{ marginLeft: "5px" }}>-1</button>
