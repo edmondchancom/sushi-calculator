@@ -210,8 +210,8 @@ function App() {
                 {/* 白碟顯示：數量 × 單價 單價調整 = 總額 數量調整 */}
                 <p style={{ display: "inline-block", marginRight: "10px" }}>
                     白碟: {white} × HK${whitePrice}
-                    <button onClick={() => setWhitePrice(whitePrice + 1)} style={{ marginLeft: "5px" }}>單價+1</button>
-                    <button onClick={() => setWhitePrice(whitePrice > 0 ? whitePrice - 1 : 0)} style={{ marginLeft: "5px" }}>單價-1</button>
+                    <button onClick={() => setWhitePrice(whitePrice + 1)} style={{ marginLeft: "5px" }}>$+1</button>
+                    <button onClick={() => setWhitePrice(whitePrice > 0 ? whitePrice - 1 : 0)} style={{ marginLeft: "5px" }}>$-1</button>
                     = HK${white * whitePrice}
                     <button onClick={() => setWhite(white + 1)} style={{ marginLeft: "10px" }}>+1</button>
                     <button onClick={() => setWhite(white > 0 ? white - 1 : 0)}>-1</button>
