@@ -8,6 +8,9 @@ function App() {
     const [silver, setSilver] = useState(0);
     const [black, setBlack] = useState(0);
     const [white, setWhite] = useState(0);
+    const [whitePrice, setWhitePrice] = useState(10); // 白碟預設 HK$10
+
+
 
     // 麵類・湯類清單
     const noodleSoupItems = [
@@ -114,7 +117,7 @@ function App() {
         gold * prices.gold +
         silver * prices.silver +
         black * prices.black +
-        white * prices.white +
+        white * whitePrice +
         [...noodleSoupItems, ...sideItems, ...dessertItems].reduce(
             (sum, item) => sum + counts[item.key] * item.price,
             0
@@ -204,10 +207,18 @@ function App() {
 
             <div className="plate-row">
                 <img src={`${process.env.PUBLIC_URL}/White.JPEG`} alt="白碟" className="plate-icon" />
-                <p>白碟: {white} (HK$ {white * prices.white})</p>
-                <button onClick={() => setWhite(white + 1)}>+1</button>
-                <button onClick={() => setWhite(white > 0 ? white - 1 : 0)}>-1</button>
+                {/* 白碟顯示：數量 × 單價 單價調整 = 總額 數量調整 */}
+                <p style={{ display: "inline-block", marginRight: "10px" }}>
+                    白碟: {white} × HK${whitePrice}
+                    <button onClick={() => setWhitePrice(whitePrice + 1)} style={{ marginLeft: "5px" }}>單價+1</button>
+                    <button onClick={() => setWhitePrice(whitePrice > 0 ? whitePrice - 1 : 0)} style={{ marginLeft: "5px" }}>單價-1</button>
+                    = HK${white * whitePrice}
+                    <button onClick={() => setWhite(white + 1)} style={{ marginLeft: "10px" }}>+1</button>
+                    <button onClick={() => setWhite(white > 0 ? white - 1 : 0)}>-1</button>
+                </p>
             </div>
+
+
 
             {/* Accordion - 麵類・湯類 */}
             <h2 onClick={() => toggleSection("noodles")}>
@@ -355,6 +366,11 @@ function App() {
             <h2>服務費 (10%): HK$ {serviceFee}</h2>
             <h2>總金額 (含服務費): <span style={{ color: "red" }}> HK$ {grossTotal}</span></h2>
             <h2>可用印花卡: <span style={{ color: "red" }}>{Math.floor(grossTotal / 80)} 張</span></h2>
+            {/* 免責聲明 */}
+            <p style={{ fontSize: "14px", color: "#666", marginTop: "10px" }}>
+                以上價錢只供參考，一切以結帳時為準!
+            </p>
+
 
 
 
