@@ -212,18 +212,22 @@ function App() {
                     className="plate-icon"
                 />
 
-                <span style={{ width: "180px" }}>
-                    白碟: {white} × HK${whitePrice} = HK${white * whitePrice}
-                </span>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                    {/* 第一行：數量 × 單價 = 總額 */}
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                        <span>白碟: {white} × HK${whitePrice} = HK${white * whitePrice}</span>
+                    </div>
 
-                {/* 單價調整 */}
-                <button onClick={() => setWhitePrice(whitePrice + 1)} style={{ marginLeft: "10px" }}>$+1</button>
-                <button onClick={() => setWhitePrice(whitePrice > 0 ? whitePrice - 1 : 0)} style={{ marginLeft: "5px" }}>$-1</button>
-               
-                {/* 數量調整 */}
-                <button onClick={() => setWhite(white + 1)} style={{ marginLeft: "10px" }}>+1</button>
-                <button onClick={() => setWhite(white > 0 ? white - 1 : 0)} style={{ marginLeft: "5px" }}>-1</button>
+                    {/* 第二行：所有按鈕 */}
+                    <div style={{ display: "flex", alignItems: "center", marginTop: "5px" }}>
+                        <button onClick={() => setWhitePrice(whitePrice + 1)} style={{ marginRight: "5px" }}>$+1</button>
+                        <button onClick={() => setWhitePrice(whitePrice > 0 ? whitePrice - 1 : 0)} style={{ marginRight: "15px" }}>$-1</button>
+                        <button onClick={() => setWhite(white + 1)} style={{ marginRight: "5px" }}>+1</button>
+                        <button onClick={() => setWhite(white > 0 ? white - 1 : 0)}>-1</button>
+                    </div>
+                </div>
             </div>
+
 
 
 
