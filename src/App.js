@@ -342,23 +342,41 @@ function App() {
                 <div>
                     {others.map((item, index) => (
                         <div key={index} className="plate-row">
+                            {/* 單價輸入 */}
                             <label>
-                                單價：
+                                單價： 
+                                HK$
                                 <input
                                     type="number"
                                     value={item.price}
-                                    onChange={(e) => updateOther(index, "price", e.target.value)}
+                                    onChange={(e) => updateOther(index, "price", Number(e.target.value))}
+                                    style={{ width: "60px" }}
                                 />
                             </label>
-                            <label>
-                                數量：
-                                <input
-                                    type="number"
-                                    value={item.qty}
-                                    onChange={(e) => updateOther(index, "qty", e.target.value)}
-                                />
-                            </label>
-                            <p>
+
+                            {/* 數量顯示 + 調整按鈕 */}
+                            <div style={{ marginLeft: "15px" }}>
+                                <span>數量: {item.qty}</span>
+                                <button
+                                    onClick={() => updateOther(index, "qty", item.qty + 1)}
+                                    style={{ marginLeft: "10px" }}
+                                >
+                                    +1
+                                </button>
+                                <button
+                                    onClick={() =>
+                                        updateOther(index, "qty", item.qty > 0 ? item.qty - 1 : 0)
+                                    }
+                                    style={{ marginLeft: "5px" }}
+                                >
+                                    -1
+                                </button>
+                            </div>
+
+
+
+                            {/* 總計顯示 */}
+                            <p style={{ marginLeft: "10px" }}>
                                 總計：<span style={{ color: "red" }}>HK$ {item.price * item.qty}</span>
                             </p>
                         </div>
@@ -366,6 +384,8 @@ function App() {
                     <button onClick={addOther}>新增其他項目</button>
                 </div>
             )}
+
+
 
 
 
