@@ -19,7 +19,7 @@ function App() {
         { key: "kamatamaUdon", name: "釜玉烏冬", price: 28, image: "B3.png" },
         { key: "shrimpTempuraUdon", name: "炸蝦天婦羅烏冬", price: 28, image: "B4.png" },
         { key: "tonkotsuRamen", name: "豚骨拉麵", price: 32, image: "B5.png" },
-        { key: "tonkotsuRamen", name: "辣豚骨拉麵", price: 32, image: "B7B.png" },
+        { key: "sptonkotsuRamen", name: "辣豚骨拉麵", price: 32, image: "B7B.png" },
         { key: "taiClamRamen", name: "鯛魚湯蜆肉拉麵", price: 33, image: "B6.png" },
         { key: "beefUdon", name: "牛肉烏冬", price: 33, image: "B7.png" },
     ];
