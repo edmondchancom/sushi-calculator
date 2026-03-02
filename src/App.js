@@ -19,6 +19,7 @@ function App() {
         { key: "kamatamaUdon", name: "釜玉烏冬", price: 28, image: "B3.png" },
         { key: "shrimpTempuraUdon", name: "炸蝦天婦羅烏冬", price: 28, image: "B4.png" },
         { key: "tonkotsuRamen", name: "豚骨拉麵", price: 32, image: "B5.png" },
+        { key: "tonkotsuRamen", name: "辣豚骨拉麵", price: 32, image: "B7B.png" },
         { key: "taiClamRamen", name: "鯛魚湯蜆肉拉麵", price: 33, image: "B6.png" },
         { key: "beefUdon", name: "牛肉烏冬", price: 33, image: "B7.png" },
     ];
@@ -388,7 +389,8 @@ function App() {
             <h2>總淨金額: HK$ {netTotal}</h2>
             <h2>服務費 (10%): HK$ {serviceFee}</h2>
             <h2>總金額 (含服務費): <span style={{ color: "red" }}> HK$ {Math.round(grossTotal - (hasSurveyCoupon ? 3 : 0))}</span></h2>
-            <h2>可用印花卡: <span style={{ color: "red" }}>{Math.floor((Math.round(grossTotal - (hasSurveyCoupon ? 3 : 0))) / 80)} 張</span></h2>
+            <h2>可用印花卡: <span style={{ color: "red" }}>{Math.floor(Math.round(grossTotal) / 80)} 張
+</span></h2>
             {/* 免責聲明 */}
             <p style={{ fontSize: "14px", color: "#666", marginTop: "10px" }}>
                 以上價錢只供參考，一切以結帳時為準!
